@@ -6,6 +6,7 @@ import Marathon from "../Pages/Marathon";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import DashBoard from "../Pages/DashBoard";
 
 
 
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>
+      },
+      {
+        path: "/dashboard",
+        element: <DashBoard></DashBoard>
       }
     ]
   },

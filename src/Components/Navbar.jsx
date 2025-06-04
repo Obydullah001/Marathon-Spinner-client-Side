@@ -3,8 +3,20 @@ import { Link } from "react-router";
 import { AuthContext } from "../assets/AuthProvider/AuthProvider";
 
 const Navbar = () => {
-  const {user} = use(AuthContext);
+  const {user , logOut} = use(AuthContext);
   console.log(user);
+
+  const handleSignOut = ()=>{
+    logOut()
+    .then({
+     
+    })
+    .catch((error)=>{
+      console.log(error);
+      
+    })
+
+  }
   
   const links = (
     <>
@@ -57,12 +69,32 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         <ul className="menu menu-horizontal px-1">{links}</ul>
-        <Link to="/login" className="btn">
+        {
+          !user?(
+            <>
+            <Link to="/login" className="btn">
           Sign In
         </Link>
         <Link to="/register" className="btn">
           Register
         </Link>
+        </>
+          ):(
+            <>
+            <ul>
+              <li>
+               <Link to="/dashboard" className="">
+              Dashboard 
+            </Link>
+            </li>
+            </ul>
+        <img className="rounded-full size-10" src={`${user? user.photoURL: 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?t=st=1746701702~exp=1746705302~hmac=15084d3b32a11e03ef638f83771da3c75f9c79448c7f45c0978ce4a92ecc7aee&w=900' }`}  alt="" />
+        <button onClick={handleSignOut}  className="btn">
+          signOut
+        </button>
+            </>
+          )
+        }
       </div>
     </div>
   );
