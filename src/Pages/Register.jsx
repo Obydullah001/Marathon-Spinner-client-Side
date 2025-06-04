@@ -16,12 +16,12 @@ const Register = () => {
         .then((result)=>{
           const user = result.user;
           console.log(user);
-        updatedUser({displayName: registerData.name , photoURL:registerData.photo}).then(()=>{
-          setUser({...user ,displayName:registerData.name , photoURL:registerData.photo})
-        }) 
-        .catch((error)=>{
-          console.log(error);
-          setUser(user)
+        // updatedUser({displayName: registerData.name , photoURL:registerData.photo}).then(()=>{
+        //   setUser({...user ,displayName:registerData.name , photoURL:registerData.photo})
+        // }) 
+        // .catch((error)=>{
+        //   console.log(error);
+        //   setUser(user)
           
         })         
         })
