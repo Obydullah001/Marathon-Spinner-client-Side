@@ -10,7 +10,7 @@ const Navbar = () => {
   const handleSignOut = ()=>{
     logOut()
     .then(()=>{
-     toast.success(' Out SuccessFully')
+     toast.success('SignOut SuccessFully')
     })
     .catch((error)=>{
       console.log(error);
@@ -89,7 +89,7 @@ const Navbar = () => {
             </Link>
             </li>
             </ul>
-        <img className="rounded-full size-10" src={`${user? user.photoURL: 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?t=st=1746701702~exp=1746705302~hmac=15084d3b32a11e03ef638f83771da3c75f9c79448c7f45c0978ce4a92ecc7aee&w=900' }`}  alt="" />
+        <img className="rounded-full size-10 mx-5" src={`${user? user.photoURL: 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?t=st=1746701702~exp=1746705302~hmac=15084d3b32a11e03ef638f83771da3c75f9c79448c7f45c0978ce4a92ecc7aee&w=900' }`}  alt="" />
         <button onClick={handleSignOut}  className="btn">
           signOut
         </button>

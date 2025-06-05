@@ -1,11 +1,12 @@
 import React, { use } from 'react';
 import { Link } from 'react-router';
 import { AuthContext } from '../assets/AuthProvider/AuthProvider';
+import toast from 'react-hot-toast';
 
 
 
 const Register = () => {
-  const {createUser, updatedUser, setUser } = use(AuthContext) 
+  const {createUser, updatedUser, setUser , googleSignIn } = use(AuthContext) 
     const handleRegister = e =>{
         e.preventDefault()
          const form = e.target ;
@@ -31,7 +32,17 @@ const Register = () => {
     }
 
     const handlegooglesign = ()=>{
-
+      googleSignIn()
+      .then(result=>{
+        const user = result.user ;
+        console.log(user);
+        toast.success('sign in Successful')
+        
+      })
+      .catch((error)=>{
+        console.log(error);
+        
+      })
     }
     return (
         <div className="hero bg-base-200 min-h-screen">

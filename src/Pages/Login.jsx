@@ -1,14 +1,43 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Link } from 'react-router';
+import { AuthContext } from '../assets/AuthProvider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Login = () => {
+  const {logInUser, googleSignIn} = use(AuthContext);
 
     const handleLogin = e =>{
         e.preventDefault()
+        const email = e.target.email.value ;
+        const password = e.target.password.value ;
+        const form = {email , password};
+        console.log(form);
+        logInUser(email , password)
+        .then((result)=>{
+          const user = result.user;
+          console.log(user);
+
+          toast.success("sign In Successful")
+          
+        })
+        .catch((error)=>{
+          const errorCode = error.code;
+    const errorMessage = error.message;
+    toast.error(errorCode , errorMessage);
+        })
     }
 
     const handlegoogleSign = ()=>{
-
+      googleSignIn()
+      .then(result =>{
+        const user = result.user ;
+        console.log(user);
+        toast.success('sign in Successful')
+      })
+      .catch(error=>{
+        console.log(error);
+        
+      })
     }
 
     return (
