@@ -22,7 +22,7 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <Link className="text-[#E0FF4F]" to="/">Home</Link>
       </li>
       <li>
         <Link to="/marathon">Marathons</Link>
@@ -55,18 +55,40 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             {links}
+            {
+          !user?(
+            <>
             <Link to="/login" className="btn">
-              Sign In
+          Sign In
+        </Link>
+        <Link to="/register" className="btn">
+          Register
+        </Link>
+        </>
+          ):(
+            <>
+            <ul>
+              <li>
+               <Link to="/dashboard" className="">
+              Dashboard 
             </Link>
-            <Link to="/register" className="btn">
-              Register
-            </Link>
+            </li>
+            </ul>
+        <img className="rounded-full size-10 mx-5" src={`${user? user.photoURL: 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?t=st=1746701702~exp=1746705302~hmac=15084d3b32a11e03ef638f83771da3c75f9c79448c7f45c0978ce4a92ecc7aee&w=900' }`}  alt="" />
+        <button onClick={handleSignOut}  className="btn">
+          signOut
+        </button>
+            </>
+          )
+        }
           </ul>
         </div>
-        <Link className="btn btn-ghost text-xl">daisyUI</Link>
-        {
+        <Link to='/' className="btn text-2xl"><img className="size-32" src="https://i.ibb.co/HphGn2Vt/remove-background-fr-removebg-preview.png" alt="" /></Link>
+       <p className="text-[#FF6663]">
+         {
           user? (user.email):""
         }
+       </p>
       </div>
       <div className="navbar-end">
         <ul className="menu menu-horizontal px-1">{links}</ul>

@@ -7,6 +7,7 @@ import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import DashBoard from "../Pages/DashBoard";
+import MarathonForm from "../Components/MarathonForm";
 
 
 
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <DashBoard></DashBoard>
+      },
+      {
+        path:'addmarathon',
+        element:<MarathonForm></MarathonForm>
       }
     ]
   },
