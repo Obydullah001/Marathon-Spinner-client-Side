@@ -3,6 +3,8 @@ import { AuthContext } from "../assets/AuthProvider/AuthProvider";
 import { addDays } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { data } from "react-router";
+import toast from "react-hot-toast";
 
 const MarathonForm = () => {
   const { user } = use(AuthContext);
@@ -22,6 +24,21 @@ const MarathonForm = () => {
     const formData = new FormData(form)
     const marathonData = Object.fromEntries(formData.entries())
     console.log(marathonData);
+
+    fetch('http://localhost:3000/events', {
+      method: 'POST',
+      headers: {
+        'content-type' :'application/json'
+      },
+      body: JSON.stringify(marathonData)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      if (data.insertedId) {
+        toast.success('Event Added Successfully')
+        form.reset()
+      }
+    })
 
   }
   return (
@@ -98,6 +115,7 @@ const MarathonForm = () => {
               onChange={(date) => setSelectedDate(date)}
               minDate={new Date()}
               maxDate={addDays(new Date(), 0)}
+              name="createdDate"
               placeholderText="Select a date between today and 5 days in the future"
             />
           </fieldset>
@@ -127,7 +145,7 @@ const MarathonForm = () => {
         <input
           type="submit"
           className="btn w-full mt-5"
-          value="Find Roommate"
+          value="Add Marathon Events"
         />
       </form>
     </div>
