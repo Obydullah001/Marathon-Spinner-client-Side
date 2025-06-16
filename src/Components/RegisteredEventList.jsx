@@ -1,22 +1,28 @@
 import React, { use, useEffect, useState } from 'react';
 import ApplyTable from './ApplyTable';
+import { AuthContext } from '../assets/AuthProvider/AuthProvider';
 
-const RegisteredEventList = ({myRegisteredPromise}) => {
+const RegisteredEventList = () => {
 
-    const registration = use(myRegisteredPromise);
-    console.log(registration);
+    // const registration = use(myRegisteredPromise);
+    // console.log(registration);
+    const {user}= use(AuthContext)
     
-    // const [registrationData , setRegistrationData]= useState();
-
+    const [registration , setRegistration]= useState([]);
+    const [ refetch , setRefetch] =useState(true)
 // console.log(registrationData);
 
-//   useEffect(()=>{
-//     fetch('http://localhost:3000/registered')
-//     .then(res=> res.json())
-//     .then(data => {
-//     setRegistrationData(data);
-//     })
-//   },[])
+  useEffect(()=>{
+    if (user?.email) {
+      
+    fetch(`http://localhost:3000/registered?applicant=${user.email}`)
+    .then(res=> res.json())
+    .then(data => {
+    setRegistration(data);
+    })
+    }
+  },[user , refetch])
+  
     
     return (
         <div className='mb-16'>
@@ -35,8 +41,12 @@ const RegisteredEventList = ({myRegisteredPromise}) => {
             <tbody className=''>
            {
             registration.map(register=> <ApplyTable 
-            key={registration._id}
+            key={register._id}
             register={register}
+            registration ={registration}
+            setRegistration={setRegistration}
+            refetch={refetch}
+            setRefetch={setRefetch}
             ></ApplyTable>)
            }
             </tbody>

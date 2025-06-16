@@ -4,11 +4,11 @@ import { Link } from 'react-router';
 import { AuthContext } from '../assets/AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 
-const ApplyTable = ({register}) => {
+const ApplyTable = ({register , myRegistrationData ,setMyRegistrationData , refetch , setRefetch}) => {
 
     const {user}= use(AuthContext);
 
-
+  // const [display , setDisplay] = useState(null);
     const handleUpdateRegisterForm =e =>{
        e.preventDefault()
        const form = e.target ;
@@ -27,6 +27,7 @@ const ApplyTable = ({register}) => {
            console.log(data);
            
            if (data.modifiedCount>0) {
+            setRefetch(!refetch)
                 Swal.fire({
                position: "center",
                icon: "success",
@@ -34,7 +35,13 @@ const ApplyTable = ({register}) => {
                showConfirmButton: false,
                timer: 1500,
              });
-             
+             const updatedList = myRegistrationData.map((item) =>
+          item._id === register._id ? { ...item, ...updatedData } : item
+        );
+        setMyRegistrationData(updatedList);
+
+        // Close modal after update
+        setOpen(false);
            }
            
        })
@@ -60,13 +67,15 @@ const ApplyTable = ({register}) => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.deletedCount > 0) {
-                        // const remaining = events?.filter(singleEvent => singleEvent._id !== _id)
+          //                const remaining = register.filter(item => item._id !== id);
+          //  setRefetch(remaining)
                         Swal.fire({
                   title: "Deleted!",
                   text: "Your Event has been deleted.",
                   icon: "success",
                 });
-                // setEvents(remaining)
+                // setDisplay(remainingRegistration)
+                window.location.reload()
                     }
                     
                 })

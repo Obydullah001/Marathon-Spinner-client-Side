@@ -119,7 +119,7 @@ const RegisterEvent = () => {
         <label className="label text-lg">User Email</label>
         <input
           type="email"
-          name="email"
+          name="applicant"
           className="w-full input"
           defaultValue={user?.email}
           readOnly
