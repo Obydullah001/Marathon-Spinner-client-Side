@@ -17,6 +17,15 @@ const EventDetails = () => {
             name,
             marathonStartDate
     }= events
+
+
+      const currentDate = new Date();
+      const registrationStart = new Date(startDate);
+      const registrationEnd = new Date(endDate);
+
+      const hasStarted = currentDate >= registrationStart;
+      const notEnded = currentDate <= registrationEnd;
+      const isRegistrationOpen = hasStarted && notEnded;
     
     return (
       <div className="max-w-lg p-4 shadow-md dark:bg-gray-50 dark:text-gray-800">
@@ -50,7 +59,17 @@ const EventDetails = () => {
             <p> Create By  {name} </p>
             <p>Event Created At  {createdDate} </p>
         </div>
-       <Link to={`/registerEvent/${_id}`}> <button className='btn btn-active'>Registration </button></Link>
+       <div className="mt-4">
+          {isRegistrationOpen ? (
+            <Link to={`/registerEvent/${_id}`}>
+              <button className="btn btn-success">Registration Open</button>
+            </Link>
+          ) : (
+            <button className="btn btn-error disabled">
+              Registration Closed
+            </button>
+          )}
+        </div>
 	</div>
 </div>
     );

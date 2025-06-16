@@ -1,6 +1,6 @@
 import React, { use, useState } from "react";
 import { AuthContext } from "../assets/AuthProvider/AuthProvider";
-import { addDays } from "date-fns";
+import { addDays, format } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { data } from "react-router";
@@ -9,20 +9,36 @@ import toast from "react-hot-toast";
 const MarathonForm = () => {
   const { user } = use(AuthContext);
   console.log("this is user", user);
-  const [startDate, setStartDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
-  const onChange = (dates) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
-  };
+  // const [startDate, setStartDate] = useState(new Date());
+  // const [selectedDate, setSelectedDate] = useState(new Date());
+  // const [endDate, setEndDate] = useState(null);
+  // const onChange = (dates) => {
+  //   const [start, end] = dates;
+  //   setStartDate(start);
+  //   setEndDate(end);
+  // };
+
+  const [startRegistrationDate, setStartRegistrationDate] = useState(null);
+  const [endRegistrationDate, setEndRegistrationDate] = useState(null);
+  const [marathonStartDate, setMarathonStartDate] = useState(null);
+  const [createdDate, setCreatedDate] = useState(new Date());
 
   const handleAddForm = e =>{
     e.preventDefault()
     const form = e.target ;
     const formData = new FormData(form)
-    const marathonData = Object.fromEntries(formData.entries())
+    const marathonData = Object.fromEntries(formData.entries());
+
+    // marathonData.startDate = startRegistrationDate?.toISOString();
+    // marathonData.endDate = endRegistrationDate?.toISOString();
+    // marathonData.marathonStartDate = marathonStartDate?.toISOString();
+    // marathonData.createdDate = createdDate?.toISOString();
+
+
+    marathonData.startDate = format(startRegistrationDate, "yyyy-MM-dd");
+marathonData.endDate = format(endRegistrationDate, "yyyy-MM-dd");
+marathonData.marathonStartDate = format(marathonStartDate, "yyyy-MM-dd");
+marathonData.createdDate = format(createdDate, "yyyy-MM-dd");
     console.log(marathonData);
 
     fetch('http://localhost:3000/events', {
@@ -54,19 +70,38 @@ const MarathonForm = () => {
               placeholder="Example: Name of The Marathon"
             />
           </fieldset>
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box  border p-4">
+         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
             <label className="label text-lg">Start Registration Date</label>
-           <input type="date" 
-           name='startDate'
-           />
+            <DatePicker
+              selected={startRegistrationDate}
+              onChange={(date) => setStartRegistrationDate(date)}
+              name="startDate"
+              className="input w-full"
+              placeholderText="Pick start date"
+              required
+            />
           </fieldset>
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box  border p-4">
+          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
             <label className="label text-lg">End Registration Date</label>
-          <input type="date" name="endDate" id="" />
+            <DatePicker
+              selected={endRegistrationDate}
+              onChange={(date) => setEndRegistrationDate(date)}
+              name="endDate"
+              className="input w-full"
+              placeholderText="Pick end date"
+              required
+            />
           </fieldset>
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box  border p-4">
-            <label className="label text-lg">Marathon Start Date </label>
-           <input type="date" name="marathonStartDate" id="" />
+          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+            <label className="label text-lg">Marathon Start Date</label>
+            <DatePicker
+              selected={marathonStartDate}
+              onChange={(date) => setMarathonStartDate(date)}
+              name="marathonStartDate"
+              className="input w-full"
+              placeholderText="Pick marathon start date"
+              required
+            />
           </fieldset>
           <fieldset className="fieldset bg-base-200 border-base-300 rounded-box  border p-4">
             <label className="label text-lg">Location </label>
@@ -111,11 +146,12 @@ const MarathonForm = () => {
           <fieldset className="fieldset bg-base-200 border-base-300 rounded-box  border p-4">
             <label className="label text-lg"> Created At </label>
             <DatePicker
-              selected={selectedDate}
-              onChange={(date) => setSelectedDate(date)}
+              selected={createdDate}
+              onChange={(date) => setCreatedDate(date)}
               minDate={new Date()}
               maxDate={addDays(new Date(), 0)}
               name="createdDate"
+              required  
               placeholderText="Select a date between today and 5 days in the future"
             />
           </fieldset>
