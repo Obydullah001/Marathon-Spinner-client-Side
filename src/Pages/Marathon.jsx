@@ -6,7 +6,7 @@ const Marathon = () => {
   const [sortOrder, setSortOrder] = useState('desc'); // Default: Newest first
 
   useEffect(() => {
-    fetch(`http://localhost:3000/events?sortOrder=${sortOrder}`)
+    fetch(`https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app/events?sortOrder=${sortOrder}`)
       .then(res => res.json())
       .then(data => setMarathonEvent(data));
   }, [sortOrder]); // Refetch when sortOrder changes

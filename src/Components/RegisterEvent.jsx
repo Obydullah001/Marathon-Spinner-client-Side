@@ -22,7 +22,7 @@ const RegisterEvent = () => {
         const formData = new FormData(form)
         const registeredData = Object.fromEntries(formData.entries())
         console.log(registeredData);
-        fetch('http://localhost:3000/registered',{
+        fetch('https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app/registered',{
             method: 'POST',
             headers:{
                 'content-type': 'application/json'
@@ -32,7 +32,7 @@ const RegisterEvent = () => {
         .then(res=> res.json())
         .then(data => {
             if (data.insertedId) {
-           fetch(`http://localhost:3000/events/${registeredData.eventId}`, {
+           fetch(`https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app/events/${registeredData.eventId}`, {
         method: 'PATCH',
         headers: {
           'content-type': 'application/json',

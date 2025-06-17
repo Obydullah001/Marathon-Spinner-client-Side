@@ -41,7 +41,7 @@ const AddedEvents = ({ myEvent ,events , setEvents }) => {
     const formData = new FormData(form)
     const updatedData = Object.fromEntries(formData.entries())
     console.log(updatedData);
-    fetch(`http://localhost:3000/events/${_id}`,{
+    fetch(`https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app/events/${_id}`,{
          method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -83,7 +83,7 @@ const AddedEvents = ({ myEvent ,events , setEvents }) => {
         console.log(result.isConfirmed);
         
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/events/${_id}`,{
+        fetch(`https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app/events/${_id}`,{
             method: 'DELETE'
         })
         .then(res => res.json())

@@ -8,7 +8,7 @@ const Featured = () => {
     
 
   useEffect(() => {
-    fetch("http://localhost:3000/events/availability")
+    fetch("https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app/events/availability")
       .then((res) => res.json())
       .then((data) => {
         setAfford(data);

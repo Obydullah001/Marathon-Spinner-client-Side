@@ -5,7 +5,7 @@ import { AuthContext } from '../../assets/AuthProvider/AuthProvider';
 
 
 const axiosSecure = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app',
 });
 
 const useAxiosSecure = () => {
