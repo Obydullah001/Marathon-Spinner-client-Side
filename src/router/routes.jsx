@@ -33,6 +33,10 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><Marathon></Marathon></PrivateRoute>
       },
       {
+      path:'eventDetails/:id',
+      element: <PrivateRoute><EventDetails></EventDetails></PrivateRoute>
+    },
+      {
         path: "/login",
         element: <Login></Login>
       },
