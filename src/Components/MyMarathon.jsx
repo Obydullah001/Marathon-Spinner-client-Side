@@ -47,8 +47,8 @@ const MyMarathon = () => {
         />
       </div>
 
-         <div className='overflow-x-auto '>
-            <table className='w-10/12 mx-auto border ' >
+         <div className='overflow-x-auto  '>
+            <table className='w-full border ' >
             <thead className='text-left font-bold border-2 border-blue-800 shadow-2xs '>
               <td className='pl-5 py-5'>Title</td>
               <td>Description</td>

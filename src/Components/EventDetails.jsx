@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link, useLoaderData, useParams } from 'react-router';
 import RegistrationCount from './RegistrationCount';
+import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+
 
 const EventDetails = () => {
     const events  = useLoaderData();
@@ -38,10 +40,10 @@ const EventDetails = () => {
 
     
     return (
-      <div className="max-w-lg p-4 shadow-md dark:bg-gray-50 dark:text-gray-800">
+      <div className="max-w-5xl p-4 shadow-md dark:bg-gray-50 dark:text-gray-800 mx-auto my-7">
 	<div className="flex justify-between pb-4 border-bottom">
 		<div className="flex items-center">
-			<Link rel="noopener noreferrer" href="#" className="mb-0 capitalize dark:text-gray-800">Marathon Location: {location}</Link>
+			<Link rel="noopener noreferrer" href="#" className="mb-0 capitalize dark:text-amber-400 text-4xl text-amber-400">Marathon Location: {location}</Link>
 		</div>
 		
 	</div>
@@ -53,7 +55,8 @@ const EventDetails = () => {
 			</div>
 
 		</div>
-		<div className="space-y-2">
+		<div className='flex justify-between'>
+      <div className="space-y-2">
 			<Link rel="noopener noreferrer" href="#" className="block">
 				<h3 className="text-xl font-semibold dark:text-violet-600">{description}</h3>
 			</Link>
@@ -61,15 +64,39 @@ const EventDetails = () => {
 			<p className="leading-snug dark:text-gray-600">Registration Ends at :{endDate} </p>
 
             <h1>Total Registration {registrationCount?registrationCount : 0} </h1>
-
-		</div>
-
-        <div>
             <p>Marathon Starts At {marathonStartDate} </p>
             <p>Total Distance {distance} </p>
+
+		</div>
+       <div>
+            
+            <div className="text-center -mt-9">
+          <h2 className="text-lg font-semibold">Countdown Until Marathon Starts</h2>
+          <CountdownCircleTimer
+            isPlaying
+            duration={timeUntilMarathon} // Time in seconds until the marathon
+            colors={['#004777', '#F7B801', '#A30000']}
+            colorsTime={[timeUntilMarathon / 2, timeUntilMarathon / 4, 0]}
+            size={150}
+          >
+          {({ remainingTime }) => {
+              const days = Math.floor(remainingTime / (60 * 60 * 24));
+              const hours = Math.floor((remainingTime % (60 * 60 * 24)) / (60 * 60));
+              const minutes = Math.floor((remainingTime % (60 * 60)) / 60);
+              return (
+                <div>
+                  <p>{days}d {hours}h {minutes}m</p>
+                </div>
+              );
+            }}
+          </CountdownCircleTimer>
+        </div>
             <p> Create By  {name} </p>
             <p>Event Created At  {createdDate} </p>
         </div>
+    </div>
+
+       
        <div className="mt-4">
           {isRegistrationOpen ? (
             <Link to={`/registerEvent/${_id}`}>
