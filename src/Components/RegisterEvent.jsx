@@ -16,7 +16,7 @@ const RegisterEvent = () => {
     } = registerEvents ;
 
 
-    const handleRegisterForm = e=>{
+    const handleRegisterForm = e =>{
         e.preventDefault();
          const form = e.target ;
         const formData = new FormData(form)
@@ -32,6 +32,13 @@ const RegisterEvent = () => {
         .then(res=> res.json())
         .then(data => {
             if (data.insertedId) {
+           fetch(`http://localhost:3000/events/${registeredData.eventId}`, {
+        method: 'PATCH',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ increment: 1 }), // Backend should handle increment logic
+      });
         toast.success('Registered Event Successfully')
         form.reset()
       }

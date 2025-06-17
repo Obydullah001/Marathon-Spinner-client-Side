@@ -69,7 +69,7 @@ const Navbar = () => {
             <>
             <ul>
               <li>
-               <Link to="/dashboard" className="">
+               <Link to="/dashboardLayout" className="">
               Dashboard 
             </Link>
             </li>
@@ -106,7 +106,7 @@ const Navbar = () => {
             <>
             <ul>
               <li>
-               <Link to="/dashboard" className="">
+               <Link to="/dashboardLayout" className="">
               Dashboard 
             </Link>
             </li>

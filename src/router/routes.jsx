@@ -13,6 +13,8 @@ import MyMarathon from "../Components/Mymarathon";
 import RegisterEvent from "../Components/RegisterEvent";
 import RegistrationCount from "../Components/RegistrationCount";
 import PrivateRoute from "../Private/PrivateRoute";
+import DashBoardLayout from "../MainLayout/DashBoardLayout";
+import MyApply from "../Components/MyApply";
 
 
 
@@ -40,26 +42,16 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <DashBoard></DashBoard>
+        element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>
       },
-      {
-        path:'/addmarathon',
-        element:<MarathonForm></MarathonForm>
-      },
-      {
-        path:'/myMarathon',
-        
-        element: <MyMarathon></MyMarathon>
-      },
+      
+      
       {
         path: '/eventDetails/:event_id',
         loader: ({params})=>fetch(`http://localhost:3000/events/${params.event_id}`),
         element: <EventDetails></EventDetails>
       },
-      { path: '/registrationCount/:count_id',
-        loader:({params})=>fetch(`http://localhost:3000/registered/event/${params.count_id}`),
-        element:<RegistrationCount></RegistrationCount>
-      },
+     
       {
         path: '/registerEvent/:id',
         loader: ({params})=>fetch(`http://localhost:3000/events/${params.id}`),
@@ -67,4 +59,22 @@ export const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: '/dashboardLayout',
+    element: <PrivateRoute><DashBoardLayout></DashBoardLayout></PrivateRoute>,
+    children:[
+      {
+        path: 'addmarathonForm',
+        element: <MarathonForm></MarathonForm>
+      },
+      {
+        path: 'mymarathon',
+        element: <MyMarathon></MyMarathon>
+      },
+      {
+        path:'myapply',
+        element: <MyApply></MyApply>
+      }
+    ]
+  }
 ]);

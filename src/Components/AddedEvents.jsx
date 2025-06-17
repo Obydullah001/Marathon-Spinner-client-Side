@@ -62,7 +62,7 @@ const AddedEvents = ({ myEvent ,events , setEvents }) => {
             showConfirmButton: false,
             timer: 1500,
           });
-          
+          window.location.reload()
         }
         
     })

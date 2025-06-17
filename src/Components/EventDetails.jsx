@@ -19,7 +19,8 @@ const EventDetails = () => {
             description,
             createdDate,
             name,
-            marathonStartDate
+            marathonStartDate ,
+            registrationCount
     }= events
 
 
@@ -30,6 +31,11 @@ const EventDetails = () => {
       const hasStarted = currentDate >= registrationStart;
       const notEnded = currentDate <= registrationEnd;
       const isRegistrationOpen = hasStarted && notEnded;
+
+      const startTimestamp = new Date(marathonStartDate).getTime() / 1000; // Convert to seconds
+      const currentTimestamp = Date.now() / 1000; // Convert to seconds
+      const timeUntilMarathon = startTimestamp - currentTimestamp;
+
     
     return (
       <div className="max-w-lg p-4 shadow-md dark:bg-gray-50 dark:text-gray-800">
@@ -45,6 +51,7 @@ const EventDetails = () => {
 			<div className="flex items-center text-2xl">
 				<span>{title}</span>
 			</div>
+
 		</div>
 		<div className="space-y-2">
 			<Link rel="noopener noreferrer" href="#" className="block">
@@ -53,7 +60,7 @@ const EventDetails = () => {
 			<p className="leading-snug dark:text-gray-600">Registration Starts at :{startDate} </p>
 			<p className="leading-snug dark:text-gray-600">Registration Ends at :{endDate} </p>
 
-            {/* <h1>Total Registration Count <RegistrationCount></RegistrationCount> </h1> */}
+            <h1>Total Registration {registrationCount?registrationCount : 0} </h1>
 
 		</div>
 

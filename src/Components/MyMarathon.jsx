@@ -6,13 +6,20 @@ import AddedEvents from './AddedEvents';
 const MyMarathon = () => {
     
     const [events , setEvents]= useState([]);
+    const [searchText, setSearchText] = useState('');
     console.log(events);
     const {user}= use(AuthContext);
     console.log(user);
 
     const filteredEvents = events?.filter(myEvent=> myEvent.email == user.email );
     console.log(filteredEvents);
-    
+    const searchedEvents = filteredEvents?.filter(event =>
+    event.title.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+
+
+
      useEffect(()=>{
         fetch('http://localhost:3000/events')
         .then(res=> res.json())
@@ -31,6 +38,15 @@ const MyMarathon = () => {
          <div className='mb-16'>
         <h1 className='text-center font-serif text-3xl p-1.5 text-emerald-700'> See Your List What you  Personally have Added </h1>
         <p className=' font-sans text-center pb-9 text-lg'>Your Added List Has been given Here  </p>
+             <div className='text-center mb-4'>
+        <input
+          type='text'
+          className='input input-bordered w-1/2'
+          placeholder='Search by Marathon Title...'
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+      </div>
+
          <div className='overflow-x-auto '>
             <table className='w-10/12 mx-auto border ' >
             <thead className='text-left font-bold border-2 border-blue-800 shadow-2xs '>
@@ -43,7 +59,7 @@ const MyMarathon = () => {
             </thead>
             <tbody className=''>
            {
-            filteredEvents.map(myEvent=><AddedEvents key={myEvent._id} events={events} setEvents={setEvents} myEvent={myEvent} ></AddedEvents>)
+            searchedEvents.map(myEvent=><AddedEvents key={myEvent._id} events={events} setEvents={setEvents} myEvent={myEvent} ></AddedEvents>)
            }
             </tbody>
             </table>

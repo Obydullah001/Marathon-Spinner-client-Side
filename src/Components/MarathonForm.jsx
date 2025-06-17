@@ -39,6 +39,7 @@ const MarathonForm = () => {
 marathonData.endDate = format(endRegistrationDate, "yyyy-MM-dd");
 marathonData.marathonStartDate = format(marathonStartDate, "yyyy-MM-dd");
 marathonData.createdDate = format(createdDate, "yyyy-MM-dd");
+marathonData.registrationCount = 0 ;
     console.log(marathonData);
 
     fetch('http://localhost:3000/events', {
