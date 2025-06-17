@@ -83,7 +83,7 @@ const Navbar = () => {
         }
           </ul>
         </div>
-        <Link to='/' className="btn text-2xl"><img className="size-32" src="https://i.ibb.co/HphGn2Vt/remove-background-fr-removebg-preview.png" alt="" /></Link>
+        <Link to='/' className=" text-2xl"><img className="size-16 w-36" src="https://i.ibb.co/HfhsqcMv/remove-background-fr-removebg-preview2.png" alt="" /></Link>
        <p className="text-[#FF6663]">
          {
           user? (user.email):""

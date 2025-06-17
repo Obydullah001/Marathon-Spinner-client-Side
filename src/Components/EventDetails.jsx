@@ -1,8 +1,12 @@
 import React from 'react';
-import { Link, useLoaderData } from 'react-router';
+import { Link, useLoaderData, useParams } from 'react-router';
+import RegistrationCount from './RegistrationCount';
 
 const EventDetails = () => {
     const events  = useLoaderData();
+    const {registered_id}= useParams()
+    console.log(registered_id);
+    
     console.log(events);
     const {
             _id,
@@ -49,7 +53,7 @@ const EventDetails = () => {
 			<p className="leading-snug dark:text-gray-600">Registration Starts at :{startDate} </p>
 			<p className="leading-snug dark:text-gray-600">Registration Ends at :{endDate} </p>
 
-            
+            {/* <h1>Total Registration Count <RegistrationCount></RegistrationCount> </h1> */}
 
 		</div>
 

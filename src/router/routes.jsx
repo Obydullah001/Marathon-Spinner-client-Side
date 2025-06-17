@@ -11,6 +11,7 @@ import MarathonForm from "../Components/MarathonForm";
 import EventDetails from "../Components/EventDetails";
 import MyMarathon from "../Components/Mymarathon";
 import RegisterEvent from "../Components/RegisterEvent";
+import RegistrationCount from "../Components/RegistrationCount";
 
 
 
@@ -50,9 +51,13 @@ export const router = createBrowserRouter([
         element: <MyMarathon></MyMarathon>
       },
       {
-        path: '/eventDetails/:id',
-        loader: ({params})=>fetch(`http://localhost:3000/events/${params.id}`),
+        path: '/eventDetails/:event_id',
+        loader: ({params})=>fetch(`http://localhost:3000/events/${params.event_id}`),
         element: <EventDetails></EventDetails>
+      },
+      { path: '/registrationCount/:count_id',
+        loader:({params})=>fetch(`http://localhost:3000/registered/event/${params.count_id}`),
+        element:<RegistrationCount></RegistrationCount>
       },
       {
         path: '/registerEvent/:id',
