@@ -1,29 +1,33 @@
 import React, { use, useEffect, useState } from 'react';
 import ApplyTable from './ApplyTable';
 import { AuthContext } from '../assets/AuthProvider/AuthProvider';
+import useAxiosSecure from './hooks/useAxiosSecure';
 
 const RegisteredEventList = () => {
 
     // const registration = use(myRegisteredPromise);
     // console.log(registration);
-    const {user}= use(AuthContext)
+    const {user}= use(AuthContext);
+    console.log(user.accessToken);
+  
     
     const [registration , setRegistration]= useState([]);
      const [searchTerm, setSearchTerm] = useState('');
 
     const [ refetch , setRefetch] =useState(true)
 // console.log(registrationData);
+const axiosSecure = useAxiosSecure();
 
-  useEffect(()=>{
+   useEffect(() => {
     if (user?.email) {
-      
-    fetch(`http://localhost:3000/registered?applicant=${user.email}`)
-    .then(res=> res.json())
-    .then(data => {
-    setRegistration(data);
-    })
+      axiosSecure
+        .get(`/registered?applicant=${user.email}`)
+        .then((res) => {
+          setRegistration(res.data);
+        })
+        .catch((err) => console.error(err));
     }
-  },[user , refetch]);
+  }, [user, refetch, axiosSecure]);
 
     const filteredRegistrations = registration.filter((reg) =>
     reg.title.toLowerCase().includes(searchTerm.toLowerCase())
