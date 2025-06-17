@@ -26,6 +26,7 @@ const AuthProvider = ({children}) => {
         return updateProfile(auth.currentUser , updatedData )
     }
     const logOut = ()=>{
+        SetLoading(true)
         return signOut(auth)
     }
     const googleSignIn = ()=>{

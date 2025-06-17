@@ -12,6 +12,7 @@ import EventDetails from "../Components/EventDetails";
 import MyMarathon from "../Components/Mymarathon";
 import RegisterEvent from "../Components/RegisterEvent";
 import RegistrationCount from "../Components/RegistrationCount";
+import PrivateRoute from "../Private/PrivateRoute";
 
 
 
@@ -27,7 +28,7 @@ export const router = createBrowserRouter([
       {
         path:"/marathon",
         loader: ()=>fetch('http://localhost:3000/events'),
-        element: <Marathon></Marathon>
+        element: <PrivateRoute><Marathon></Marathon></PrivateRoute>
       },
       {
         path: "/login",

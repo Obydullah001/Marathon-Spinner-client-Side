@@ -7,12 +7,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBTJ7zC-U0Oto9Lvas2-IL17JfR2pXNbcc",
-  authDomain: "marathon-spinner-auth.firebaseapp.com",
-  projectId: "marathon-spinner-auth",
-  storageBucket: "marathon-spinner-auth.firebasestorage.app",
-  messagingSenderId: "598369292350",
-  appId: "1:598369292350:web:4cfa9e93997a1bba2bc16f"
+  apiKey: import.meta.env.apiKey,
+  authDomain: import.meta.env.authDomain,
+  projectId: import.meta.env.projectId,
+  storageBucket: import.meta.env.storageBucket,
+  messagingSenderId: import.meta.env.messagingSenderId,
+  appId: import.meta.env.appId
 };
 
 // Initialize Firebase
