@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLoaderData, useParams } from 'react-router';
 import RegistrationCount from './RegistrationCount';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 
 
 const EventDetails = () => {
-    const events  = useLoaderData();
-    const {registered_id}= useParams()
-    console.log(registered_id);
+    // const events  = useLoaderData();
+    const {id}= useParams()
+    // console.log(id);
+
+    const [events , setEvents]= useState({})
     
     console.log(events);
     const {
@@ -25,6 +27,14 @@ const EventDetails = () => {
             registrationCount
     }= events
 
+    useEffect(()=>{
+      fetch(`https://marathon-spinner-server.vercel.app/events/${id}`)
+      .then(res => res.json())
+      .then(data =>{
+        setEvents(data);
+        
+      })
+    },[])
 
       const currentDate = new Date();
       const registrationStart = new Date(startDate);

@@ -15,10 +15,11 @@ const ApplyTable = ({register , myRegistrationData ,setMyRegistrationData , refe
        const formData = new FormData(form)
        const updatedData = Object.fromEntries(formData.entries())
        console.log(updatedData);
-       fetch(`https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app/registered/${register._id}`,{
+       fetch(`https://marathon-spinner-server.vercel.app/registered/${register._id}`,{
             method: "PUT",
          headers: {
            "content-type": "application/json",
+           authorization: `Bearer ${user?.accessToken}`
          },
          body: JSON.stringify(updatedData),
        })
@@ -61,7 +62,7 @@ const ApplyTable = ({register , myRegistrationData ,setMyRegistrationData , refe
                 console.log(result.isConfirmed);
                 
               if (result.isConfirmed) {
-                fetch(`https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app/registered/${register._id}`,{
+                fetch(`https://marathon-spinner-server.vercel.app/registered/${register._id}`,{
                     method: 'DELETE'
                 })
                 .then(res => res.json())

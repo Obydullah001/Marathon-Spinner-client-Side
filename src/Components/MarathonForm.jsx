@@ -42,10 +42,11 @@ marathonData.createdDate = format(createdDate, "yyyy-MM-dd");
 marathonData.registrationCount = 0 ;
     console.log(marathonData);
 
-    fetch('https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app/events', {
+    fetch('https://marathon-spinner-server.vercel.app/events', {
       method: 'POST',
       headers: {
-        'content-type' :'application/json'
+        'content-type' :'application/json',
+        authorization: `Bearer ${user?.accessToken}`
       },
       body: JSON.stringify(marathonData)
     })

@@ -5,7 +5,7 @@ import { AuthContext } from '../../assets/AuthProvider/AuthProvider';
 
 
 const axiosSecure = axios.create({
-  baseURL: 'https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app',
+  baseURL: 'https://marathon-spinner-server.vercel.app',
 });
 
 const useAxiosSecure = () => {
@@ -19,7 +19,7 @@ const useAxiosSecure = () => {
       return config;
     });
 
-    return () => {
+    return () => {  
       axiosSecure.interceptors.request.eject(interceptor);
     };
   }, [user?.accessToken]);

@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
       },
       {
         path:"/marathon",
-        loader: ()=>fetch('https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app/events'),
+        // loader: ()=>fetch('https://marathon-spinner-server.vercel.app/events'),
         element: <PrivateRoute><Marathon></Marathon></PrivateRoute>
       },
       {
@@ -48,17 +48,10 @@ export const router = createBrowserRouter([
         path: "/dashboard",
         element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>
       },
-      
-      
-      {
-        path: '/eventDetails/:event_id',
-        loader: ({params})=>fetch(`https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app/events/${params.event_id}`),
-        element: <EventDetails></EventDetails>
-      },
      
       {
         path: '/registerEvent/:id',
-        loader: ({params})=>fetch(`https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app/events/${params.id}`),
+        loader: ({params})=>fetch(`https://marathon-spinner-server.vercel.app/events/${params.id}`),
         element: <RegisterEvent></RegisterEvent>
       }
     ]

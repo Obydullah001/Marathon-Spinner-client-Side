@@ -1,22 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import MarathonEventCard from '../Components/MarathonEventCard';
+import { AuthContext } from '../assets/AuthProvider/AuthProvider';
+
 
 const Marathon = () => {
   const [marathonEvent, setMarathonEvent] = useState([]);
-  const [sortOrder, setSortOrder] = useState('desc'); // Default: Newest first
+  const [sortOrder, setSortOrder] = useState('desc'); 
+  const {user} = use(AuthContext)
 
   useEffect(() => {
-    fetch(`https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app/events?sortOrder=${sortOrder}`)
+    fetch(`https://marathon-spinner-server.vercel.app/events?sortOrder=${sortOrder}`,{headers: {
+            authorization: `Bearer ${user?.accessToken}`
+        }})
       .then(res => res.json())
-      .then(data => setMarathonEvent(data));
-  }, [sortOrder]); // Refetch when sortOrder changes
+      .then(data => setMarathonEvent(data))
+  }, [sortOrder, user]); 
 
   return (
     <div>
       <h1 className='text-center text-4xl text-amber-400 mt-5'>All Marathon Events</h1>
       <p className='text-2xl font-bold text-center mb-5'>Sort By Date where added Newest First Or Oldest First  </p>
 
-      {/* Sorting Dropdown */}
+      
       <div className='text-center mb-4'>
         <select
           className='input input-bordered w-1/3'

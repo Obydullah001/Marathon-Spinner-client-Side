@@ -1,19 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { Link } from 'react-router';
+import { AuthContext } from '../../assets/AuthProvider/AuthProvider';
 
 const Featured = () => {
 
+    const {user} = use(AuthContext)
     const [afford, setAfford] = useState([]);
     console.log(afford);
     
 
   useEffect(() => {
-    fetch("https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app/events/availability")
+    fetch("https://marathon-spinner-server.vercel.app/events/availability",{headers: {
+            authorization: `Bearer ${user?.accessToken}`
+        }})
       .then((res) => res.json())
       .then((data) => {
         setAfford(data);
       });
-  }, []);
+  }, [user]);
 
     return (
          <div className="w-11/12 mx-auto my-14 ">

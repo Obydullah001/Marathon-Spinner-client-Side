@@ -21,7 +21,11 @@ const MyMarathon = () => {
 
 
      useEffect(()=>{
-        fetch('http://localhost:3000/events')
+        fetch('https://marathon-spinner-server.vercel.app/events',
+          {headers: {
+            authorization: `Bearer ${user?.accessToken}`
+        }}
+        )
         .then(res=> res.json())
         .then(data =>{
             setEvents(data);

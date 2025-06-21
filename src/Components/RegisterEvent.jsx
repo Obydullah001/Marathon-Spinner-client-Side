@@ -22,22 +22,24 @@ const RegisterEvent = () => {
         const formData = new FormData(form)
         const registeredData = Object.fromEntries(formData.entries())
         console.log(registeredData);
-        fetch('https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app/registered',{
+        fetch('https://marathon-spinner-server.vercel.app/registered',{
             method: 'POST',
             headers:{
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${user?.accessToken}`
             },
             body: JSON.stringify(registeredData)
         })
         .then(res=> res.json())
         .then(data => {
             if (data.insertedId) {
-           fetch(`https://marathon-spinner-server-g5biatqim-obydullah001s-projects.vercel.app/events/${registeredData.eventId}`, {
+           fetch(`https://marathon-spinner-server.vercel.app/events/${registeredData.eventId}`, {
         method: 'PATCH',
         headers: {
           'content-type': 'application/json',
+          authorization: `Bearer ${user?.accessToken}`
         },
-        body: JSON.stringify({ increment: 1 }), // Backend should handle increment logic
+        body: JSON.stringify({ increment: 1 }), 
       });
         toast.success('Registered Event Successfully')
         form.reset()
